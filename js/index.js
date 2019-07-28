@@ -8,7 +8,7 @@
 //         document.getElementById("displayLs").innerHTML = getLs;
 //     }
 // };
-// 単語のセットを定義
+// 単語のセットを定義！
 
 // function sendData(){
 //     //入力されたデータを取得
