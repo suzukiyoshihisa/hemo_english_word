@@ -1,30 +1,12 @@
 "use strict";
 // 起動時に以下を実行
-// window.onload = firstScript;
-// function firstScript(){
-//     if (getLs.value == "") {
-//         document.getElementById("displayLs").innerHTML = "データがありません";
-//     } else {
-//         document.getElementById("displayLs").innerHTML = getLs;
-//     }
-// };
-// 単語のセットを定義！
+window.onload = firstScript;
+function firstScript() {
+  const lengthLs = localStorage.length;
+  document.getElementById("countLs").innerHTML = lengthLs;
+};
+// 単語のセットを定義
 
-// function sendData(){
-//     //入力されたデータを取得
-//     var wo = document.getElementById("word").value;
-//     var de = document.getElementById("description").value;
-
-//     //①データをオブジェクト保存する
-//     var flashcards = {
-//         word: wo,
-//         desc: de
-//     }
-//     //②JSONデータに変換して登録する
-//     window.localStorage.setItem("setdata", JSON.stringify(flashcards));
-// };　
-
-// 任意のキーで複数データを追加
 function pushData(){
   //入力されたデータを取得
   var nu = document.getElementById("num").value;
@@ -48,17 +30,22 @@ function pushData(){
 function deleteData(){
   document.getElementById("displayLs").textContent = "";
 };
-
+// Localstorage内のデータを全て表示
 function showData() {
   document.getElementById("displayLs").textContent = "";
   Object.keys(localStorage).forEach(function(key) {
     var d = JSON.parse(window.localStorage.getItem(key));
-    console.log(d.word);
-    console.log(d.desc);
     document.getElementById("displayLs").insertAdjacentHTML("afterbegin", `キー：${key}　 ワード：${d.word}　翻訳：${d.desc} <br>`);
   });
 };
-
+// Localstorageからランダムで1件を表示
+function randomData() {
+  document.getElementById("randomLs").textContent = "";
+  Object.keys(localStorage).forEach(function(key) {
+    var d = JSON.parse(window.localStorage.getItem(key));
+    document.getElementById("displayLs").insertAdjacentHTML("afterbegin", `キー：${key}　 ワード：${d.word}　翻訳：${d.desc} <br>`);
+  });
+};
 
 //dataAというキーでフォームの値を取得
 let getLs = localStorage.getItem('dataA');
