@@ -27,10 +27,23 @@ function pushData(){
 
 // displayLsのテキストを削除
 function deleteData(){
-  document.getElementById("displayLs").textContent = "";
+  document.getElementById("tableLs").textContent = "";
 };
 
 // Localstorage内のデータを全て表示
+function viewData() {
+//  document.getElementById("tableLs").textContent = ""; //初期化
+  Object.keys(localStorage).forEach(function(key){
+  var d = JSON.parse(localStorage.getItem(key));
+  //document.getElementById("tableLs").insertAdjacentHTML("afterbegin", `キー：${key}　 ワード：${d.word}　翻訳：${d.desc} <br>`);
+  document.getElementById("tableLs").insertAdjacentHTML("afterbegin", `<tr id="${key}"><td>${d.word}</td><td>${d.desc}</td><td><button type="button">削除</button></td></tr>`);
+  });
+};
+
+function deleteRow() {
+  // この行を削除する処理を追加。 removeRow(this)_?
+};
+// Localstorage内のデータを全て表示（旧）
 function showData() {
   document.getElementById("displayLs").textContent = "";
   Object.keys(localStorage).forEach(function(key) {
@@ -39,6 +52,7 @@ function showData() {
   });
 };
 
+
 // Localstorageからランダムで1件を表示
 function randomData() {
   const v = localStorage.length;
@@ -46,13 +60,15 @@ function randomData() {
     alert("LocalStorageにデータがありません");
   } else {
       document.getElementById("randomLs").textContent = "";
-      let lengthLs = localStorage.length;
-      let ranNum = Math.floor(Math.random() * lengthLs); // 最大数からランダムで
-      let nl = localStorage.key(ranNum);
-      let lsg = JSON.parse(window.localStorage.getItem(nl));
+      const lengthLs = localStorage.length;
+      const ranNum = Math.floor(Math.random() * lengthLs); // 最大数からランダムで
+      const nl = localStorage.key(ranNum);
+      const lsg = JSON.parse(window.localStorage.getItem(nl));
       document.getElementById("randomLs").insertAdjacentHTML("afterbegin", `ワード：${lsg.word}　翻訳：${lsg.desc} <br>`); 
   }
 };
+
+
 
 // ランダムに数字を表示
 function randomNumber() {
