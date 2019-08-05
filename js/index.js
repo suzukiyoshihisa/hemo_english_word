@@ -1,9 +1,22 @@
 "use strict";
 // 起動時に以下を実行
-window.onload = viewData;
-function firstScript() {
-  let lengthLs = localStorage.length;
-  document.getElementById("countLs").innerHTML = lengthLs;
+window.onload = firstFunction;
+
+// Localstorage内のデータを全て表示
+function firstFunction() {
+
+  Object.keys(localStorage).forEach(function(key){
+  var d = JSON.parse(localStorage.getItem(key));
+    document.getElementById("tableLs").insertAdjacentHTML("beforeend",
+      `<tr id="${key}">
+        <td>${d.word}</td>
+        <td>${d.desc}</td>
+        <td><button type="button" onclick="deleteLsData(this)">削除</button></td>
+      </tr>`);
+  });
+    //  LocalStorageが保有する件数を表示
+    let lengthLs = localStorage.length;
+    document.getElementById("countLs").innerHTML = lengthLs;
 };
 
 // 単語のセットを定義
@@ -25,26 +38,12 @@ function pushData(){
   localStorage.setItem(nu, setjson);
 };　
 
-// Localstorage内のデータを全て表示
-function viewData() {
-//  document.getElementById("tableLs").textContent = ""; //初期化
-  Object.keys(localStorage).forEach(function(key){
-  var d = JSON.parse(localStorage.getItem(key));
-  //document.getElementById("tableLs").insertAdjacentHTML("afterbegin", `キー：${key}　 ワード：${d.word}　翻訳：${d.desc} <br>`);
-    document.getElementById("tableLs").insertAdjacentHTML("beforeend",
-      `<tr id="${key}">
-        <td>${d.word}</td>
-        <td>${d.desc}</td>
-        <td><button type="button" onclick="deleteRow(this)">削除</button></td>
-      </tr>`);
-  });
-};
-
-function deleteRow(obj) {
-  // 削除ボタンを押下された行を取得
-  const tr = obj.parentNode.parentNode;
-  // trのインデックスを取得して行を削除する
-  tr.parentNode.deleteRow(tr.sectionRowIndex);
+// 削除ボタンを押すと表示されている列とLocalstorageの両方を削除
+function deleteLsData(AAA) {
+  const rows = AAA.parentNode.parentNode;  // 削除ボタンを押された行のtr行を選択
+  const pickTrId = rows.getAttribute("id");  // rowsで取得した行のidを取得
+  localStorage.removeItem(pickTrId);  // localstorageからidと同名のキーを削除
+  rows.parentNode.deleteRow(rows.sectionRowIndex);  // rowsでtbody内の行番号を指定して削除
 };
 
 //LocalStorage内のデータを全て破棄する
