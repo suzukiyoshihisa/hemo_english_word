@@ -4,7 +4,6 @@ window.onload = firstFunction;
 
 // Localstorage内のデータを全て表示
 function firstFunction() {
-
   Object.keys(localStorage).forEach(function(key){
   var d = JSON.parse(localStorage.getItem(key));
     document.getElementById("tableLs").insertAdjacentHTML("beforeend",
@@ -17,6 +16,22 @@ function firstFunction() {
     //  LocalStorageが保有する件数を表示
     let lengthLs = localStorage.length;
     document.getElementById("countLs").innerHTML = lengthLs;
+};
+
+function showMaxKey() {
+  let numKey = 0;
+  Object.keys(localStorage).forEach(function (key) {
+    let insertKey = Number(key);
+    if (numKey < insertKey) {
+      console.log("keyは" + insertKey + " 現在の数値は" + numKey);
+      numKey = insertKey;
+      console.log(numKey);
+    } else {
+      console.log("keyは" + insertKey + " 現在の数値は" + numKey + " →破棄");
+    }
+
+  });
+  console.log("一番大きかったkeyは" + numKey);
 };
 
 // 単語のセットを定義
@@ -49,4 +64,9 @@ function deleteLsData(AAA) {
 //LocalStorage内のデータを全て破棄する
 function dumpLsdata(){
   localStorage.clear()
+};
+
+function checkLsKey() {
+  const d = JSON.parse(localStorage.getItem());
+  console.log(chch);
 };
