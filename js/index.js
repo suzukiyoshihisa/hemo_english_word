@@ -4,6 +4,7 @@ window.onload = firstFunction;
 
 // Localstorage内のデータを全て表示
 function firstFunction() {
+  document.getElementById("tableLs").innerHTML= "<tr><td>単語</td><td>訳</td><td></td></tr>";
   Object.keys(localStorage).forEach(function(key){
   var d = JSON.parse(localStorage.getItem(key));
     document.getElementById("tableLs").insertAdjacentHTML("beforeend",
@@ -18,55 +19,55 @@ function firstFunction() {
     document.getElementById("countLs").innerHTML = lengthLs;
 };
 
-function showMaxKey() {
+// 単語のセットを定義
+function pushData() {
+  if (document.getElementById('word').value == "" ||document.getElementById('description').value == "") {
+    alert("入力項目が空欄です");
+  } else {
   let numKey = 0;
   Object.keys(localStorage).forEach(function (key) {
     let insertKey = Number(key);
     if (numKey < insertKey) {
-      console.log("keyは" + insertKey + " 現在の数値は" + numKey);
       numKey = insertKey;
-      console.log(numKey);
-    } else {
-      console.log("keyは" + insertKey + " 現在の数値は" + numKey + " →破棄");
+    } 
     }
+  );
+  let realKey = numKey + 1;
 
-  });
-  console.log("一番大きかったkeyは" + numKey);
-};
-
-// 単語のセットを定義
-function pushData(){
   //入力されたデータを取得
-  var nu = document.getElementById("num").value;
   var wo = document.getElementById("word").value;
   var de = document.getElementById("description").value;
 
   //データをオブジェクトに保存する
-  var array = [];
   var flashcards = {
       word: wo,
       desc: de
   }
-  array.push(flashcards);
   //JSONデータに変換して登録する
   var setjson = JSON.stringify(flashcards);
-  localStorage.setItem(nu, setjson);
+    localStorage.setItem(realKey, setjson);
+    document.submit.reset();
+  }
 };　
 
 // 削除ボタンを押すと表示されている列とLocalstorageの両方を削除
 function deleteLsData(AAA) {
-  const rows = AAA.parentNode.parentNode;  // 削除ボタンを押された行のtr行を選択
-  const pickTrId = rows.getAttribute("id");  // rowsで取得した行のidを取得
-  localStorage.removeItem(pickTrId);  // localstorageからidと同名のキーを削除
-  rows.parentNode.deleteRow(rows.sectionRowIndex);  // rowsでtbody内の行番号を指定して削除
+  let askDelete = window.confirm("削除してもよろしいですか？");
+  if (askDelete) {
+    const rows = AAA.parentNode.parentNode;  // 削除ボタンを押された行のtr行を選択
+    const pickTrId = rows.getAttribute("id");  // rowsで取得した行のidを取得
+    localStorage.removeItem(pickTrId);  // localstorageからidと同名のキーを削除
+    rows.parentNode.deleteRow(rows.sectionRowIndex);  // rowsでtbody内の行番号を指定して削除
+  }
 };
 
 //LocalStorage内のデータを全て破棄する
-function dumpLsdata(){
-  localStorage.clear()
+function dumpLsdata() {
+  let askDelete = window.confirm("【注意】全てのデータを削除しようとしています！本当によろしいですか？");
+  if (askDelete) {
+    localStorage.clear()
+  }
 };
 
-function checkLsKey() {
-  const d = JSON.parse(localStorage.getItem());
-  console.log(chch);
-};
+//保存時にリロードをかける
+document.getElementById("saveLs").addEventListener("click", firstFunction);
