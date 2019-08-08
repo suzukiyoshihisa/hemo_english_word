@@ -6,7 +6,7 @@ window.onload = firstFunction;
 function firstFunction() {
 
   Object.keys(localStorage).forEach(function(key){
-  var d = JSON.parse(localStorage.getItem(key));
+  const d = JSON.parse(localStorage.getItem(key));
     document.getElementById("tableLs").insertAdjacentHTML("beforeend",
       `<tr id="${key}">
         <td>${d.word}</td>
@@ -22,25 +22,25 @@ function firstFunction() {
 // 単語のセットを定義
 function pushData(){
   //入力されたデータを取得
-  var nu = document.getElementById("num").value;
-  var wo = document.getElementById("word").value;
-  var de = document.getElementById("description").value;
+  let nu = document.getElementById("num").value;
+  let wo = document.getElementById("word").value;
+  let de = document.getElementById("description").value;
 
   //データをオブジェクトに保存する
-  var array = [];
-  var flashcards = {
+  let array = [];
+  let flashcards = {
       word: wo,
       desc: de
   }
   array.push(flashcards);
   //JSONデータに変換して登録する
-  var setjson = JSON.stringify(flashcards);
+  const setjson = JSON.stringify(flashcards);
   localStorage.setItem(nu, setjson);
 };　
 
 // 削除ボタンを押すと表示されている列とLocalstorageの両方を削除
-function deleteLsData(AAA) {
-  const rows = AAA.parentNode.parentNode;  // 削除ボタンを押された行のtr行を選択
+function deleteLsData(pushedDeleteButton) {
+  const rows = pushedDeleteButton.parentNode.parentNode;  // 削除ボタンを押された行のtr行を選択
   const pickTrId = rows.getAttribute("id");  // rowsで取得した行のidを取得
   localStorage.removeItem(pickTrId);  // localstorageからidと同名のキーを削除
   rows.parentNode.deleteRow(rows.sectionRowIndex);  // rowsでtbody内の行番号を指定して削除
