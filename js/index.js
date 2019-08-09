@@ -4,12 +4,14 @@ window.onload = firstFunction;
 
 // Localstorage内のデータを全て表示
 function firstFunction() {
+
   document.getElementById("tableLs").innerHTML =
     "<tr><td>単語</td><td>訳</td><td>お気に入り</td><td>削除</td></tr>";
   Object.keys(localStorage).forEach(function(key) {
     const d = JSON.parse(localStorage.getItem(key));
     document.getElementById("tableLs").insertAdjacentHTML(
       "beforeend",
+
       `<tr id="${key}">
         <td>${d.word}</td>
         <td>${d.description}</td>
@@ -30,6 +32,7 @@ function showLength() {
 }
 
 // 単語のセットを定義
+
 function pushData() {
   if (
     document.getElementById("word").value == "" ||
@@ -45,6 +48,7 @@ function pushData() {
       }
     });
     const realKey = numKey + 1;
+
 
     //入力されたデータを取得
     const data_word = document.getElementById("word").value;
@@ -67,6 +71,7 @@ function pushData() {
 }
 // 削除ボタンを押すと表示されている列とLocalstorageの両方を削除
 function deleteLsData(pushedDeleteButton) {
+
   let askDelete = window.confirm("削除してもよろしいですか？");
   if (askDelete) {
     const rows = pushedDeleteButton.parentNode.parentNode; // 削除ボタンを押された行のtr行を選択
