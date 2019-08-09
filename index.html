@@ -1,35 +1,35 @@
 <!DOCTYPE html>
 <html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>ローカルストレージ</title>
-  <link rel="stylesheet" href="./css/style.css">
-</head>
-<body>
-  <div id="input_field">
-    <h2>単語を登録</h2>
-    <form name="submit">
-      <input type="text" id="word" placeholder="単語を入力">
-      <input type="text" id="description" placeholder="訳を入力">
-      <!-- <button type="button" onclick="addData()">localstorageに値を保存して消去</button> -->
-      <!-- <button type="button" onclick="sendData()">複数のデータを保存</button> -->
-      <button type="button" id ="saveLs" onclick="pushData()">保存</button>
-
-    </form>
-    <h2>単語一覧</h2>
-    <div>
-      <table>
-        <tbody id="tableLs">
-        </tbody>
-      </table>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>ローカルストレージ</title>
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
+  <body>
+    <div id="input_field">
+      <h2>単語を登録</h2>
+      <form name="submit">
+        <input type="text" id="word" placeholder="単語を入力" />
+        <input type="text" id="description" placeholder="訳を入力" />
+        <!-- <button type="button" onclick="addData()">localstorageに値を保存して消去</button> -->
+        <!-- <button type="button" onclick="sendData()">複数のデータを保存</button> -->
+        <button type="button" id="saveLs" onclick="pushData()">保存</button>
+      </form>
+      <h2>単語一覧</h2>
+      <div>
+        <table>
+          <tbody id="tableLs"></tbody>
+        </table>
+      </div>
+      <h2>登録件数</h2>
+      <div id="countLs"></div>
+      <br /><br /><br /><br /><br />
+      <button type="button" onclick="dumpLsdata()">
+        LS内に保存されている全ての値を消去
+      </button>
     </div>
-    <h2>登録件数</h2>
-    <div id="countLs"></div>
-    <br><br><br><br><br>
-    <button type="button" onclick="dumpLsdata()">LS内に保存されている全ての値を消去</button>
-  </div>
-<script type="text/javascript" src="./js/index.js"></script>
-</body>
+    <script type="text/javascript" src="./js/index.js"></script>
+  </body>
 </html>

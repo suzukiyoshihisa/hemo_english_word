@@ -7,6 +7,6 @@ table {
     border-collapse: collapse;
   }
 
-#fav_1{
-      background-color: red;
+#fav_1 button{
+      color: red;
   }
