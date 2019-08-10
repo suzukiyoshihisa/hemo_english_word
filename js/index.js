@@ -4,32 +4,30 @@ window.onload = firstFunction;
 
 // Localstorage内のデータを全て表示
 function firstFunction() {
-  document.getElementById("tableLs").innerHTML =
+  document.getElementById("tableLocalStorage").innerHTML =
     "<tr><td>単語</td><td>訳</td><td>お気に入り</td><td>削除</td></tr>";
   Object.keys(localStorage).forEach(function(key) {
     const d = JSON.parse(localStorage.getItem(key));
-    document.getElementById("tableLs").insertAdjacentHTML(
+    document.getElementById("tableLocalStorage").insertAdjacentHTML(
       "beforeend",
-      `<tr id="${key}">
+      `<tr data-key="${key}">
         <td>${d.word}</td>
         <td>${d.description}</td>
-        <td id="fav_${
-          d.favorite
-        }"><button type="button" onclick="addFavorite(this)">★</button></td>
-        <td><button type="button" onclick="deleteLsData(this)">削除</button></td>
+        <td data-fav="fav_${d.favorite}"><button type="button" onclick="addFavorite(this)">★</button></td>
+        <td><button type="button" onclick="deleteLocalStorageData(this)">削除</button></td>
       </tr>`
     );
   });
   showLength();
 }
 
+//  LocalStorageが保有する件数を表示
 function showLength() {
-  //  LocalStorageが保有する件数を表示
-  let lengthLs = localStorage.length;
-  document.getElementById("countLs").innerHTML = lengthLs;
+  const lengthLocalStorage = localStorage.length;
+  document.getElementById("countLocalStorage").innerHTML = lengthLocalStorage;
 }
 
-// 単語のセットを定義
+// 新しい単語をLocalStorageに保存
 function pushData() {
   if (
     document.getElementById("word").value == "" ||
@@ -39,12 +37,11 @@ function pushData() {
   } else {
     let numKey = 0;
     Object.keys(localStorage).forEach(function(key) {
-      let insertKey = Number(key);
-      if (numKey < insertKey) {
-        numKey = insertKey;
+      if (numKey < Number(key)) {
+        numKey = Number(key);
       }
     });
-    const realKey = numKey + 1;
+    const realKey = numKey + 1; //一番大きいKeyの数字に1を足したものを新規のKeyとする
 
     //入力されたデータを取得
     const data_word = document.getElementById("word").value;
@@ -66,11 +63,11 @@ function pushData() {
   }
 }
 // 削除ボタンを押すと表示されている列とLocalstorageの両方を削除
-function deleteLsData(pushedDeleteButton) {
-  let askDelete = window.confirm("削除してもよろしいですか？");
+function deleteLocalStorageData(pushedDeleteButton) {
+  const askDelete = window.confirm("削除してもよろしいですか？");
   if (askDelete) {
     const rows = pushedDeleteButton.parentNode.parentNode; // 削除ボタンを押された行のtr行を選択
-    const pickTrId = rows.getAttribute("id"); // rowsで取得した行のidを取得
+    const pickTrId = rows.getAttribute("data-key"); // rowsで取得した行のidを取得
     localStorage.removeItem(pickTrId); // localstorageからidと同名のキーを削除
     rows.parentNode.deleteRow(rows.sectionRowIndex); // rowsでtbody内の行番号を指定して削除
   }
@@ -79,26 +76,26 @@ function deleteLsData(pushedDeleteButton) {
 
 // お気に入りに追加
 function addFavorite(addFavorite) {
-  const getTrId = addFavorite.parentNode.id; // お気に入りが押された行のidを選択
+  const getTrId = addFavorite.parentNode.dataset.fav; // お気に入りが押された行のidを選択
   const getTd = addFavorite.parentNode.parentNode; // 削除ボタンを押された行のtr行を選択
-  const pickTrId = getTd.getAttribute("id"); // rowsで取得した行のidを取得
-  const pickLs = JSON.parse(localStorage.getItem(pickTrId)); // rowsで取得した行のデータを取得してparse
+  const pickTrId = getTd.getAttribute("data-key"); // rowsで取得した行のidを取得
+  const pickLocalStorage = JSON.parse(localStorage.getItem(pickTrId)); // rowsで取得した行のデータを取得してparse
   if (getTrId === "fav_0") {
-    pickLs["favorite"] = "1"; //　お気に入りをオン
-    const setjson = JSON.stringify(pickLs); // 再度stringfy
+    pickLocalStorage["favorite"] = "1"; //　お気に入りをオン
+    const setjson = JSON.stringify(pickLocalStorage); // 再度stringfy
     localStorage.setItem(pickTrId, setjson);
     firstFunction();
   } else {
-    pickLs["favorite"] = "0"; //　お気に入りをオフ
-    const setjson = JSON.stringify(pickLs); // 再度stringfy
+    pickLocalStorage["favorite"] = "0"; //　お気に入りをオフ
+    const setjson = JSON.stringify(pickLocalStorage); // 再度stringfy
     localStorage.setItem(pickTrId, setjson);
     firstFunction();
   } //
 }
 
 //LocalStorage内のデータを全て破棄する
-function dumpLsdata() {
-  let askDelete = window.confirm(
+function dumpLocalStorageData() {
+  const askDelete = window.confirm(
     "【注意】全てのデータを削除しようとしています！本当によろしいですか？"
   );
   if (askDelete) {
@@ -107,4 +104,4 @@ function dumpLsdata() {
 }
 
 //保存時にリロードをかける
-document.getElementById("saveLs").addEventListener("click", firstFunction);
+document.getElementById("saveLocalStorage").addEventListener("click", firstFunction);
