@@ -11,10 +11,10 @@ function firstFunction() {
     document.getElementById("tableLocalStorage").insertAdjacentHTML(
       "beforeend",
       `<tr data-key="${key}">
-        <td>${d.word}</td>
+        <td class="font-weight-bold font-large">${d.word}</td>
         <td>${d.description}</td>
-        <td data-fav="fav_${d.favorite}"><button type="button" onclick="addFavorite(this)">★</button></td>
-        <td><button type="button" onclick="deleteLocalStorageData(this)">削除</button></td>
+        <td data-fav="fav_${d.favorite}" style="text-align: center"><button type="button" class="btn btn-light" onclick="addFavorite(this)">お気に入り</button></td>
+        <td><button type="button" class="btn btn-danger" onclick="deleteLocalStorageData(this)">削除</button></td>
       </tr>`
     );
   });
