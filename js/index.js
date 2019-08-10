@@ -90,7 +90,7 @@ function addFavorite(addFavorite) {
     const setjson = JSON.stringify(pickLocalStorage); // 再度stringfy
     localStorage.setItem(pickTrId, setjson);
     firstFunction();
-  } //
+  } 
 }
 
 //LocalStorage内のデータを全て破棄する
