@@ -1,11 +1,22 @@
+*{
+    font-family: 'Roboto','Noto Sans JP';
+}
 body{
     padding-top:2rem;
 }
 
 [data-fav="fav_1"]  button{
-      color: red;
+    background-color: #4CAF50;
   }
 
 .font-large {
 font-size: 2rem;
+}
+
+.definition-hide{
+    visibility: hidden;
+}
+
+.definition-show{
+    visibility: hidden;
 }
