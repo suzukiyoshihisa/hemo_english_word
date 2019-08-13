@@ -151,7 +151,6 @@ function displayQuiz() {
 // 正解を見るボタン
 function checkAnswer(ans) {
   const def = document.getElementById("quizDefinition");
-  console.log(def);
   def.style.visibility = "visible";
   const getTrId = ans.parentNode.id; 
   document.getElementById("answerButton").innerHTML = `
@@ -190,3 +189,34 @@ function dumpLocalStorageData() {
 document.getElementById("saveLocalStorage").addEventListener("click", showAllData);
 
 
+
+// CSVファイルの読み込み
+const form = document.forms.myform;
+form.myfile.addEventListener('change', function (e) {
+  var result = e.target.files[0];
+  //FileReaderのインスタンスを作成する
+  var reader = new FileReader();
+  //読み込んだファイルの中身を取得する
+  reader.readAsText(result);
+  //ファイルの中身を取得後に処理を行う
+  reader.addEventListener('load', function () {
+    const jsondata = JSON.parse(reader.result);
+    Object.keys(jsondata).forEach(function (key) {
+
+      const flashcards = {
+        word: jsondata[key].word,
+        definition: jsondata[key].definition,
+        favorite: "0",
+        understanding: "0"
+      };
+      const setjson = JSON.stringify(flashcards);
+      localStorage.setItem(jsondata[key].key, setjson);
+
+
+
+
+
+      
+    })
+  })
+})
