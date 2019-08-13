@@ -22,14 +22,8 @@ aaaaa
       <div class="col-lg-5">
           <h2>単語を登録</h2>
           <form name="submit">
-            <div class="form-group">
-              <label for="formGroupExampleInput">Word</label>
-              <input type="text" id="word" class="form-control input-lg" autocomplete=off placeholder="単語を入力" />
-            </div>
-            <div class="form-group">
-            <label for="formGroupExampleInput">Definition</label>
+            <input type="text" id="word" class="form-control input-lg" autocomplete=off placeholder="単語を入力" />
             <input type="text" id="definition" class="form-control input-lg" autocomplete=off placeholder="訳を入力" />
-            </div>
             <button type="button" id="saveLocalStorage" class="btn btn-primary btn-lg" onclick="pushData()">登録</button>
           </form>  
         </div>
@@ -51,9 +45,9 @@ aaaaa
         <br><br><br>
         <h2>Develop</h2>
         <button type="button" class="btn btn-danger" onclick="dumpLocalStorageData()">全てのデータを削除</button>
-        <h2>JSONインポート</h2>
-        <form name="myform">
-            <input name="myfile" type="file"  /><br/>
+        <h2>JSONインポート（データ全削除後に実行すること）</h2>
+        <form name="jsonForm">
+            <input name="jsonFile" type="file"  /><br/>
         </form>
       </div>
     </div>

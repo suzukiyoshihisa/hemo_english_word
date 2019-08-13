@@ -152,7 +152,7 @@ function displayQuiz() {
 function checkAnswer(ans) {
   const def = document.getElementById("quizDefinition");
   def.style.visibility = "visible";
-  const getTrId = ans.parentNode.id; 
+  const getTrId = ans.parentNode.id;
   document.getElementById("answerButton").innerHTML = `
     <button type="button" class="btn-lg btn-primary" onclick="answerQuiz(this,1)">おぼえた</button>
       <button type="button" class="btn-lg btn-danger" onclick="answerQuiz(this,-1)">わからない</button>
@@ -189,10 +189,9 @@ function dumpLocalStorageData() {
 document.getElementById("saveLocalStorage").addEventListener("click", showAllData);
 
 
-
-// CSVファイルの読み込み
-const form = document.forms.myform;
-form.myfile.addEventListener('change', function (e) {
+// jsonファイルの読み込み・LocalStorageへの一括登録
+const form = document.forms.jsonForm;
+form.jsonFile.addEventListener('change', function (e) {
   var result = e.target.files[0];
   //FileReaderのインスタンスを作成する
   var reader = new FileReader();
@@ -202,21 +201,25 @@ form.myfile.addEventListener('change', function (e) {
   reader.addEventListener('load', function () {
     const jsondata = JSON.parse(reader.result);
     Object.keys(jsondata).forEach(function (key) {
-
       const flashcards = {
         word: jsondata[key].word,
         definition: jsondata[key].definition,
-        favorite: "0",
-        understanding: "0"
+        favorite: 0,
+        understanding: 0
       };
       const setjson = JSON.stringify(flashcards);
       localStorage.setItem(jsondata[key].key, setjson);
-
-
-
-
-
-      
     })
   })
 })
+
+// Enterキーが押下されたとき次のフィールドにフォーカスする
+window.onkeydown = keydown; // キーの入力を監視してkeydownを発動
+function keydown(e){
+  if(e.keyCode === 13){
+    var obj = document.activeElement;
+    obj.nextElementSibling.focus();
+  }
+}
+
+
