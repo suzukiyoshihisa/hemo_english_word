@@ -11,31 +11,32 @@ function firstFunction() {
 
 function showAllData() {
   document.getElementById("tableLocalStorage").innerHTML =
-  `<tr>
-<td>単語</td>
-<td>訳</td>
-<td>理解度</td>
-<td>わかる</td>
-<td>わからん</td>
-<td>お気に入り</td>
-<td>削除</td>
-</tr>`;
-Object.keys(localStorage).forEach(function (key) {
-  const d = JSON.parse(localStorage.getItem(key));
-  document.getElementById("tableLocalStorage").insertAdjacentHTML(
-    "beforeend",
-    `<tr data-key="${key}">
+    `<thead>
+  <th scope="col">単語</th>
+  <th scope="col">訳</th>
+  <th scope="col">理解度</th>
+<!-- <td>わかる</th>
+<th scope="col">わからん</th> -->
+<th scope="col">お気に入り</th>
+<th scope="col">削除</th>
+</tr>
+</thead>`;
+  Object.keys(localStorage).forEach(function (key) {
+    const d = JSON.parse(localStorage.getItem(key));
+    document.getElementById("tableLocalStorage").insertAdjacentHTML(
+      "beforeend",
+      `<tr data-key="${key}">
       <td class="font-weight-bold font-large">${d.word}</td>
       <td>${d.definition}</td>
       <td style="text-align: center">${d.understanding}</td>
-      <td><button type="button" class="btn btn-primary" onclick="understandWord(this,1)">OK</button></td>
-      <td><button type="button" class="btn btn-danger" onclick="understandWord(this,-1)">NG</button></td>
+      <!-- <td><button type="button" class="btn btn-primary" onclick="understandWord(this,1)">OK</button></td>
+      <td><button type="button" class="btn btn-danger" onclick="understandWord(this,-1)">NG</button></td> -->
       <td data-fav="fav_${d.favorite}" style="text-align: center"><button type="button" class="btn btn-light" onclick="addFavorite(this)">⭐️</button></td>
       <td><button type="button" class="btn btn-danger" onclick="deleteLocalStorageData(this)">×</button></td>
     </tr>`
-  );
-});
-showLength();
+    );
+  });
+  showLength();
 }
 
 //  LocalStorageが保有する件数を表示
@@ -109,29 +110,30 @@ function addFavorite(addFavorite) {
     showAllData();
   }
 }
-// 理解度チェック
-function understandWord(addFavorite, checkScore) {
-  const getTrId = addFavorite.parentNode.dataset.fav; // お気に入りが押された行のidを選択
-  const getTd = addFavorite.parentNode.parentNode; // 削除ボタンを押された行のtr行を選択
-  const pickTrId = getTd.getAttribute("data-key"); // rowsで取得した行のidを取得
-  const pickLocalStorage = JSON.parse(localStorage.getItem(pickTrId)); // rowsで取得した行のデータを取得してparse
-  if(checkScore === 1){ // 理解度のスコアをあげる
-    pickLocalStorage["understanding"] = pickLocalStorage["understanding"] + 1;
-  }else if(checkScore === -1){ // 理解度のスコアを下げる
-    pickLocalStorage["understanding"] = pickLocalStorage["understanding"] - 1;
-  }
-    const setjson = JSON.stringify(pickLocalStorage); // 再度stringfy
-    localStorage.setItem(pickTrId, setjson);
-    showAllData();
-}
 
-// クイズ表示
+// 理解度チェック
+// function understandWord(addFavorite, checkScore) {
+//   const getTrId = addFavorite.parentNode.dataset.fav; // お気に入りが押された行のidを選択
+//   const getTd = addFavorite.parentNode.parentNode; // 削除ボタンを押された行のtr行を選択
+//   const pickTrId = getTd.getAttribute("data-key"); // rowsで取得した行のidを取得
+//   const pickLocalStorage = JSON.parse(localStorage.getItem(pickTrId)); // rowsで取得した行のデータを取得してparse
+//   if (checkScore === 1) { // 理解度のスコアをあげる
+//     pickLocalStorage["understanding"] = pickLocalStorage["understanding"] + 1;
+//   } else if (checkScore === -1) { // 理解度のスコアを下げる
+//     pickLocalStorage["understanding"] = pickLocalStorage["understanding"] - 1;
+//   }
+//   const setjson = JSON.stringify(pickLocalStorage); // 再度stringfy
+//   localStorage.setItem(pickTrId, setjson);
+//   showAllData();
+// }
+
+// クイズ１件表示
 function displayQuiz() {
   const localStorageLength = localStorage.length;
-    document.getElementById("randomLocalStorage").textContent = "";
-    const randomNumber = Math.floor(Math.random() * localStorageLength); // 最大数からランダムで
-    const key = localStorage.key(randomNumber);
-    const d = JSON.parse(window.localStorage.getItem(key));
+  document.getElementById("randomLocalStorage").textContent = "";
+  const randomNumber = Math.floor(Math.random() * localStorageLength); // 最大数からランダムで
+  const key = localStorage.key(randomNumber);
+  const d = JSON.parse(window.localStorage.getItem(key));
   document.getElementById("randomLocalStorage").insertAdjacentHTML("afterbegin",
     `<div data-key="${key}">
         <div id="quizWord" class="display-2 mb-3">${d.word}</div>
@@ -141,16 +143,17 @@ function displayQuiz() {
         </div>
       </div>
       `
-      // <button type="button" class="btn btn-primary" onclick="answerQuiz(this,1)">OK</button>
-      // <button type="button" class="btn btn-danger" onclick="answerQuiz(this,-1)">NG</button>
+    // <button type="button" class="btn btn-primary" onclick="answerQuiz(this,1)">OK</button>
+    // <button type="button" class="btn btn-danger" onclick="answerQuiz(this,-1)">NG</button>
   );
 };
 
+// 正解を見るボタン
 function checkAnswer(ans) {
   const def = document.getElementById("quizDefinition");
   console.log(def);
   def.style.visibility = "visible";
-  const getTrId = ans.parentNode.id; // お気に入りが押された行のidを選択
+  const getTrId = ans.parentNode.id; 
   document.getElementById("answerButton").innerHTML = `
     <button type="button" class="btn-lg btn-primary" onclick="answerQuiz(this,1)">おぼえた</button>
       <button type="button" class="btn-lg btn-danger" onclick="answerQuiz(this,-1)">わからない</button>
@@ -159,16 +162,16 @@ function checkAnswer(ans) {
 
 // 理解度チェックQUIZ用
 function answerQuiz(addScore, checkScore) {
-  const getTrId = addScore.parentNode.parentNode.dataset.key; // お気に入りが押された行のidを選択
+  const getTrId = addScore.parentNode.parentNode.dataset.key;
   console.log(getTrId);
   const pickLocalStorage = JSON.parse(localStorage.getItem(getTrId)); // rowsで取得した行のデータを取得してparse
-  if(checkScore === 1){ // 理解度のスコアをあげる
+  if (checkScore === 1) { // 理解度のスコアをあげる
     pickLocalStorage["understanding"] = pickLocalStorage["understanding"] + 1;
-  }else if(checkScore === -1){ // 理解度のスコアを下げる
+  } else if (checkScore === -1) { // 理解度のスコアを下げる
     pickLocalStorage["understanding"] = pickLocalStorage["understanding"] - 1;
   }
-    const setjson = JSON.stringify(pickLocalStorage); // 再度stringfy
-    localStorage.setItem(getTrId, setjson);
+  const setjson = JSON.stringify(pickLocalStorage); // 再度stringfy
+  localStorage.setItem(getTrId, setjson);
   displayQuiz();
   showAllData();
 }
