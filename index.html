@@ -6,52 +6,83 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
   <title>FlashCard</title>
-  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="./css/reset.css" />
   <link rel="stylesheet" href="./css/style.css" />
   <script src="https://kit.fontawesome.com/8caab3f45a.js"></script><!-- Font Awesome-->
-  <link href="https://fonts.googleapis.com/css?family=Noto+Sans+JP|Roboto&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css?family=Noto+Sans+JP:100,300,400,500,700,900|Source+Sans+Pro:200,300,600,700,900&display=swap"
+    rel="stylesheet">
 </head>
 
 <body>
-  <div class="container">
-  <div class="row">
-aaaaa
+  <div class="header">
+    <h1 class="logo">FlashCard</h1>
+    <div class="menu">
+      <ul>
+        <li><a href="#add-newword">New word</a></li>
+        <li><a href="#check">Check</a></li>
+        <li><a href="#list">List</a></li>
+      </ul>
+    </div>
   </div>
-  <div class="row mb-5">
-      <div class="col-lg-5">
-          <h2>単語を登録</h2>
-          <form name="submit">
-            <input type="text" id="word" class="form-control input-lg" autocomplete=off placeholder="単語を入力" />
-            <input type="text" id="definition" class="form-control input-lg" autocomplete=off placeholder="訳を入力" />
-            <button type="button" id="saveLocalStorage" class="btn btn-primary btn-lg" onclick="pushData()">登録</button>
-          </form>  
-        </div>
-  </div> 
-  <div class="row mb-5">
-  <div class="col-lg-7">
-      <h2 class="btn btn-secondary">ランダム出題</h2>
+  <div class="add clearfix btm50">
+    <div class="add-newword">
+      <h2>New Words</h2>
+      <p class="define btm50">Add new words you want to learn.</p>
+      <form name="submit">
+        <input type="text" id="word" class="form-submit-word btm20" autocomplete=off placeholder="Word" />
+        <!-- <span class="form-clipboard"><a href=""><i class="fas fa-paste fa-lg"></i></a></span> -->
+        <input type="text" id="definition" class="form-submit-define btm20" autocomplete=off placeholder="Definition" />
+        <button type="button" id="saveLocalStorage" class="form-add" onclick="pushData()">Add</button>
+      </form>
+    </div>
+    <div class="add-graphic">
+      <h2>Flash cards</h2>
+      <p class="define btm50">Add new words you want to learn!</p>
       <div id="randomLocalStorage">
       </div>
+      <!-- <div class = "quiz-card">
+          <div id ="quiz-word">
+            Mountain
+          </div>
+          <div id ="quizDefinition">
+            山
+          </div>       
+      </div>
+      <div id="answerButton">
+      <button type="button" id="" class="quiz-button" onclick="checkAnswer()">Flip</button>
+    </div> -->
     </div>
   </div>
-    <div class="row"> <!-- shadow p-5 mb-5 bg-white rounded -->
-      <div class="col-lg-12">
-        <h2>単語一覧</h2>
-        <p class="text-secondary">登録件数：<span id="countLocalStorage"></span>件</p>
-        <table class="table">
-          <tbody id="tableLocalStorage"></tbody>
-        </table>
-        <br><br><br>
-        <h2>Develop</h2>
-        <button type="button" class="btn btn-danger" onclick="dumpLocalStorageData()">全てのデータを削除</button>
-        <h2>JSONインポート（データ全削除後に実行すること）</h2>
-        <form name="jsonForm">
-            <input name="jsonFile" type="file"  /><br/>
-        </form>
-      </div>
+  <div class="list btm50">
+    <h2>List</h2>
+    <div class="listUtility">
+    <div class="listFinished">
+      <span class="cGreen"><i class="fas fa-check-circle"></i>&nbsp;000</span>
+      <span class="sSpace">/</span>
+      <span id="countLocalStorage"></span>
     </div>
+    <div class="listUtility clearfix">
+        <select name="listSort" id="listSort">
+            <option value="recent">Recent</option>
+            <option value="low">Low Score</option>
+            <option value="finished">Finished</option>
+            </select>            
+    </div>
+  </div>
+    <table>
+      <tbody id="tableLocalStorage"></tbody>
+    </table>
+  </div>
+  <div class="develop">
+    <h2>Develop</h2>
+    <button type="button" class="" onclick="dumpLocalStorageData()">全てのデータを削除</button>
+    <h2>JSONインポート（データ全削除後に実行すること）</h2>
+    <form name="jsonForm">
+      <input name="jsonFile" type="file" /><br />
+    </form>
   </div>
   <script type="text/javascript" src="./js/index.js"></script>
 </body>
+
 </html>
