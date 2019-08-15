@@ -28,9 +28,12 @@ function showAllData() {
       `<tr data-key="${key}">
       <td class="t-txt-word">${d.word}</td>
       <td>${d.definition}</td>
-      <td style="text-align: center">${d.understanding}</td>
-      <!-- <td><button type="button" class="btn btn-primary" onclick="understandWord(this,1)">OK</button></td>
-      <td><button type="button" class="btn btn-danger" onclick="understandWord(this,-1)">NG</button></td> -->
+      <td data-us="${d.understanding}" style="text-align: center">
+      <div class="progress">
+      <div class="progressBar" style="width: ${d.understanding}rem">
+      </div>
+      </div>
+      </td>
       <td data-fav="fav_${d.favorite}" style="text-align: center"><button type="button" class="btn btn-light" onclick="addFavorite(this)"><i class="fas fa-star fa-2x"></i></button></td>
       <td style="text-align: center"><button type="button" class="" onclick="deleteLocalStorageData(this)"><i class="far fa-trash-alt fa-2x"></i></button></td>
     </tr>`

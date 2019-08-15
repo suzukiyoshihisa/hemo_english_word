@@ -298,6 +298,18 @@ table button{
     color: #CCCCCC;
     outline: 0;
 }
+.progress{
+    margin: 0 auto;
+    width: 10rem;
+    height: 0.5rem;
+    background-color:#CCCCCC;
+    border-radius: 1rem;
+}
+.progressBar{
+    height: 0.5rem;
+    background-color: #421AAF;
+    border-radius: 1rem;
+}
 
 
 [data-fav="fav_1"] button{
