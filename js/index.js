@@ -4,9 +4,11 @@ window.onload = firstFunction;
 
 // Localstorage内のデータを全て表示
 function firstFunction() {
-  displayQuiz();
+  arreyLocalStorage();
+  // displayQuiz();
   showLength();
   showAllData();
+
 }
 
 function showAllData() {
@@ -80,6 +82,7 @@ function pushData() {
     localStorage.setItem(realKey, setjson);
     document.submit.reset(); // 保存後にフォームをリセット
   }
+  arreyLocalStorage();
 }
 // 削除ボタンを押すと表示されている列とLocalstorageの両方を削除
 function deleteLocalStorageData(pushedDeleteButton) {
@@ -90,6 +93,7 @@ function deleteLocalStorageData(pushedDeleteButton) {
     localStorage.removeItem(pickTrId); // localstorageからidと同名のキーを削除
     rows.parentNode.deleteRow(rows.sectionRowIndex); // rowsでtbody内の行番号を指定して削除
   }
+  arreyLocalStorage();
   showLength();
 }
 
@@ -157,39 +161,119 @@ function displayQuiz() {
 };
 */
 
+// 配列生成（understandingが満点の問題以外を表示）
+function arreyLocalStorage() {
+  window.arrayLS = [];
+
+  Object.keys(localStorage).forEach(function (key) {
+    const d = JSON.parse(localStorage.getItem(key));
+    if (d.understanding < 10) {
+      arrayLS.push(key);
+    }
+  })
+  if (arrayLS.length === 0) {
+    document.getElementById("randomLocalStorage").textContent = "すべての単語を習得しました！新しい単語を登録しましょう！"; //表示項目を空欄にする
+    console.log("０件です");
+  }else {
+  var a = arrayLS.length;
+  while (a) {
+    const j = Math.floor( Math.random() * a );
+    const t = arrayLS[--a];
+    arrayLS[a] = arrayLS[j];
+    arrayLS[j] = t;
+  }
+  displayQuiz(); // 問題生成
+  }
+}
+
 // ランダム表示テスト
 function displayQuiz() {
-  const localStorageLength = localStorage.length; //全体数を取得
   document.getElementById("randomLocalStorage").textContent = ""; //表示項目を空欄にする
-
-
-  
-  for (let i = 0; i < localStorageLength; i++ ) {
-    const randomNumber = Math.floor(Math.random() * localStorageLength); // 最大数からランダムで数字を取得
-    const key = localStorage.key(randomNumber);
-    const d = JSON.parse(window.localStorage.getItem(key));
-    console.log(key);
-    if (d.understanding < 10 ) {
-      document.getElementById("randomLocalStorage").insertAdjacentHTML("afterbegin",
-      `<div data-key="${key}">
-        <div class="quiz-card">
-          <div class ="quiz-word">
-          ${d.word}
-          </div>
-          <div id="quizDefinition" style="visibility: hidden;">${d.definition}</div>
-          </div>
-  
-        <div id="answerButton">
-          <button type="button" id="" class="quiz-button" onclick="checkAnswer()">Flip</button>
+  if (arrayLS.length === 0) {
+    console.log("一巡したので再生成します");
+    arreyLocalStorage();
+  } else {
+    let target = arrayLS.shift(); //配列から最初の数字を引用して削除する
+    console.log(target);
+    // let key = localStorage.key(target);
+    let d = JSON.parse(window.localStorage.getItem(target));
+    console.log(d);
+    document.getElementById("randomLocalStorage").insertAdjacentHTML("afterbegin",
+      `<div data-key="${target}">
+      <div class="quiz-card">
+        <div class ="quiz-word">
+        ${d.word}
         </div>
+        <div id="quizDefinition" style="visibility: hidden;">${d.definition}</div>
         </div>
+
+      <div id="answerButton">
+        <button type="button" id="" class="quiz-button" onclick="checkAnswer()">Flip</button>
       </div>
-        `
-    );
-      break;
-    }
+      </div>
+    </div>
+      `
+    )
   }
-};
+}
+  // for (let i = 0; i < localStorageLength; i++ ) {
+  //   const randomNumber = Math.floor(Math.random() * localStorageLength); // 最大数からランダムで数字を取得
+  //   const key = localStorage.key(randomNumber);
+  //   const d = JSON.parse(window.localStorage.getItem(key));
+  //   console.log(key);
+  //   if (d.understanding < 10 ) {
+      // document.getElementById("randomLocalStorage").insertAdjacentHTML("afterbegin",
+      // `<div data-key="${key}">
+      //   <div class="quiz-card">
+      //     <div class ="quiz-word">
+      //     ${d.word}
+      //     </div>
+      //     <div id="quizDefinition" style="visibility: hidden;">${d.definition}</div>
+      //     </div>
+  
+      //   <div id="answerButton">
+      //     <button type="button" id="" class="quiz-button" onclick="checkAnswer()">Flip</button>
+      //   </div>
+      //   </div>
+      // </div>
+      //   `
+  //   );
+  //     break;
+  //   }
+  // }
+// };
+
+// // ランダム表示テスト
+// function displayQuiz() {
+//   const localStorageLength = localStorage.length; //全体数を取得
+//   document.getElementById("randomLocalStorage").textContent = ""; //表示項目を空欄にする
+
+//   for (let i = 0; i < localStorageLength; i++ ) {
+//     const randomNumber = Math.floor(Math.random() * localStorageLength); // 最大数からランダムで数字を取得
+//     const key = localStorage.key(randomNumber);
+//     const d = JSON.parse(window.localStorage.getItem(key));
+//     console.log(key);
+//     if (d.understanding < 10 ) {
+//       document.getElementById("randomLocalStorage").insertAdjacentHTML("afterbegin",
+//       `<div data-key="${key}">
+//         <div class="quiz-card">
+//           <div class ="quiz-word">
+//           ${d.word}
+//           </div>
+//           <div id="quizDefinition" style="visibility: hidden;">${d.definition}</div>
+//           </div>
+  
+//         <div id="answerButton">
+//           <button type="button" id="" class="quiz-button" onclick="checkAnswer()">Flip</button>
+//         </div>
+//         </div>
+//       </div>
+//         `
+//     );
+//       break;
+//     }
+//   }
+// };
 
 // 正解を見るボタン
 function checkAnswer(ans) {
