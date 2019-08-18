@@ -15,10 +15,8 @@ function showAllData() {
   <th scope="col">Word</th>
   <th scope="col">Definition</th>
   <th scope="col">Understanding</th>
-<!-- <td>わかる</th>
-<th scope="col">わからん</th> -->
-<th scope="col">Favorite</th>
-<th scope="col">Delete</th>
+  <th scope="col">Favorite</th>
+  <th scope="col">Delete</th>
 </tr>
 </thead>`;
   Object.keys(localStorage).forEach(function (key) {
@@ -130,6 +128,7 @@ function addFavorite(addFavorite) {
 //   showAllData();
 // }
 
+/*
 // クイズ１件表示
 function displayQuiz() {
   const localStorageLength = localStorage.length;
@@ -155,6 +154,41 @@ function displayQuiz() {
     // <button type="button" class="btn btn-primary" onclick="answerQuiz(this,1)">OK</button>
     // <button type="button" class="btn btn-danger" onclick="answerQuiz(this,-1)">NG</button>
   );
+};
+*/
+
+// ランダム表示テスト
+function displayQuiz() {
+  const localStorageLength = localStorage.length; //全体数を取得
+  document.getElementById("randomLocalStorage").textContent = ""; //表示項目を空欄にする
+
+
+  
+  for (let i = 0; i < localStorageLength; i++ ) {
+    const randomNumber = Math.floor(Math.random() * localStorageLength); // 最大数からランダムで数字を取得
+    const key = localStorage.key(randomNumber);
+    const d = JSON.parse(window.localStorage.getItem(key));
+    console.log(key);
+    if (d.understanding < 10 ) {
+      document.getElementById("randomLocalStorage").insertAdjacentHTML("afterbegin",
+      `<div data-key="${key}">
+        <div class="quiz-card">
+          <div class ="quiz-word">
+          ${d.word}
+          </div>
+          <div id="quizDefinition" style="visibility: hidden;">${d.definition}</div>
+          </div>
+  
+        <div id="answerButton">
+          <button type="button" id="" class="quiz-button" onclick="checkAnswer()">Flip</button>
+        </div>
+        </div>
+      </div>
+        `
+    );
+      break;
+    }
+  }
 };
 
 // 正解を見るボタン
@@ -224,8 +258,8 @@ form.jsonFile.addEventListener('change', function (e) {
 
 // Enterキーが押下されたとき次のフィールドにフォーカスする
 window.onkeydown = keydown; // キーの入力を監視してkeydownを発動
-function keydown(e){
-  if(e.keyCode === 13){
+function keydown(e) {
+  if (e.keyCode === 13) {
     var obj = document.activeElement;
     obj.nextElementSibling.focus();
   }
