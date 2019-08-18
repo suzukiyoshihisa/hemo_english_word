@@ -116,52 +116,6 @@ function addFavorite(addFavorite) {
   }
 }
 
-// 理解度チェック
-// function understandWord(addFavorite, checkScore) {
-//   const getTrId = addFavorite.parentNode.dataset.fav; // お気に入りが押された行のidを選択
-//   const getTd = addFavorite.parentNode.parentNode; // 削除ボタンを押された行のtr行を選択
-//   const pickTrId = getTd.getAttribute("data-key"); // rowsで取得した行のidを取得
-//   const pickLocalStorage = JSON.parse(localStorage.getItem(pickTrId)); // rowsで取得した行のデータを取得してparse
-//   if (checkScore === 1) { // 理解度のスコアをあげる
-//     pickLocalStorage["understanding"] = pickLocalStorage["understanding"] + 1;
-//   } else if (checkScore === -1) { // 理解度のスコアを下げる
-//     pickLocalStorage["understanding"] = pickLocalStorage["understanding"] - 1;
-//   }
-//   const setjson = JSON.stringify(pickLocalStorage); // 再度stringfy
-//   localStorage.setItem(pickTrId, setjson);
-//   showAllData();
-// }
-
-/*
-// クイズ１件表示
-function displayQuiz() {
-  const localStorageLength = localStorage.length;
-  document.getElementById("randomLocalStorage").textContent = "";
-  const randomNumber = Math.floor(Math.random() * localStorageLength); // 最大数からランダムで
-  const key = localStorage.key(randomNumber);
-  const d = JSON.parse(window.localStorage.getItem(key));
-  document.getElementById("randomLocalStorage").insertAdjacentHTML("afterbegin",
-    `<div data-key="${key}">
-      <div class="quiz-card">
-        <div class ="quiz-word">
-        ${d.word}
-        </div>
-        <div id="quizDefinition" style="visibility: hidden;">${d.definition}</div>
-        </div>
-
-      <div id="answerButton">
-        <button type="button" id="" class="quiz-button" onclick="checkAnswer()">Flip</button>
-      </div>
-      </div>
-    </div>
-      `
-    // <button type="button" class="btn btn-primary" onclick="answerQuiz(this,1)">OK</button>
-    // <button type="button" class="btn btn-danger" onclick="answerQuiz(this,-1)">NG</button>
-  );
-};
-*/
-
-// 配列生成（understandingが満点の問題以外を表示）
 function arreyLocalStorage() {
   window.arrayLS = [];
 
@@ -190,14 +144,11 @@ function arreyLocalStorage() {
 function displayQuiz() {
   document.getElementById("randomLocalStorage").textContent = ""; //表示項目を空欄にする
   if (arrayLS.length === 0) {
-    console.log("一巡したので再生成します");
-    arreyLocalStorage();
+    console.log("recreate word list")
+    arreyLocalStorage(); // 一巡したら再度リストのセットを生成する
   } else {
-    let target = arrayLS.shift(); //配列から最初の数字を引用して削除する
-    console.log(target);
-    // let key = localStorage.key(target);
-    let d = JSON.parse(window.localStorage.getItem(target));
-    console.log(d);
+    const target = arrayLS.shift(); //配列から最初の数字を引用して削除する
+    const d = JSON.parse(window.localStorage.getItem(target));
     document.getElementById("randomLocalStorage").insertAdjacentHTML("afterbegin",
       `<div data-key="${target}">
       <div class="quiz-card">
@@ -216,64 +167,6 @@ function displayQuiz() {
     )
   }
 }
-  // for (let i = 0; i < localStorageLength; i++ ) {
-  //   const randomNumber = Math.floor(Math.random() * localStorageLength); // 最大数からランダムで数字を取得
-  //   const key = localStorage.key(randomNumber);
-  //   const d = JSON.parse(window.localStorage.getItem(key));
-  //   console.log(key);
-  //   if (d.understanding < 10 ) {
-      // document.getElementById("randomLocalStorage").insertAdjacentHTML("afterbegin",
-      // `<div data-key="${key}">
-      //   <div class="quiz-card">
-      //     <div class ="quiz-word">
-      //     ${d.word}
-      //     </div>
-      //     <div id="quizDefinition" style="visibility: hidden;">${d.definition}</div>
-      //     </div>
-  
-      //   <div id="answerButton">
-      //     <button type="button" id="" class="quiz-button" onclick="checkAnswer()">Flip</button>
-      //   </div>
-      //   </div>
-      // </div>
-      //   `
-  //   );
-  //     break;
-  //   }
-  // }
-// };
-
-// // ランダム表示テスト
-// function displayQuiz() {
-//   const localStorageLength = localStorage.length; //全体数を取得
-//   document.getElementById("randomLocalStorage").textContent = ""; //表示項目を空欄にする
-
-//   for (let i = 0; i < localStorageLength; i++ ) {
-//     const randomNumber = Math.floor(Math.random() * localStorageLength); // 最大数からランダムで数字を取得
-//     const key = localStorage.key(randomNumber);
-//     const d = JSON.parse(window.localStorage.getItem(key));
-//     console.log(key);
-//     if (d.understanding < 10 ) {
-//       document.getElementById("randomLocalStorage").insertAdjacentHTML("afterbegin",
-//       `<div data-key="${key}">
-//         <div class="quiz-card">
-//           <div class ="quiz-word">
-//           ${d.word}
-//           </div>
-//           <div id="quizDefinition" style="visibility: hidden;">${d.definition}</div>
-//           </div>
-  
-//         <div id="answerButton">
-//           <button type="button" id="" class="quiz-button" onclick="checkAnswer()">Flip</button>
-//         </div>
-//         </div>
-//       </div>
-//         `
-//     );
-//       break;
-//     }
-//   }
-// };
 
 // 正解を見るボタン
 function checkAnswer(ans) {
