@@ -1,4 +1,5 @@
 "use strict";
+
 // 起動時に以下を実行
 window.onload = firstFunction;
 
@@ -12,20 +13,38 @@ function firstFunction() {
 }
 
 function showAllData() {
+  let understand = 0;
   document.getElementById("tableLocalStorage").innerHTML =
     `<thead>
-  <th scope="col">Word</th>
-  <th scope="col">Definition</th>
-  <th scope="col">Understanding</th>
-  <th scope="col">Favorite</th>
-  <th scope="col">Delete</th>
-</tr>
-</thead>`;
+      <th scope="col">Word</th>
+      <th scope="col">Definition</th>
+      <th scope="col">Understanding</th>
+      <th scope="col">Favorite</th>
+      <th scope="col">Delete</th>
+    </tr>
+    </thead>`;
   Object.keys(localStorage).forEach(function (key) {
     const d = JSON.parse(localStorage.getItem(key));
-    document.getElementById("tableLocalStorage").insertAdjacentHTML(
-      "beforeend",
-      `<tr data-key="${key}">
+    if (d.understanding === 10) {
+      document.getElementById("tableLocalStorage").insertAdjacentHTML(
+        "beforeend",
+        `<tr data-key="${key}">
+        <td class="t-txt-word">${d.word}</td>
+        <td>${d.definition}</td>
+        <td data-us="${d.understanding}" style="text-align: center">
+        <div class="progressClear">
+        <i class="fas fa-check-circle fa-w-16"></i>
+        </div>
+        </td>
+        <td data-fav="fav_${d.favorite}" style="text-align: center"><button type="button" class="btn btn-light" onclick="addFavorite(this)"><i class="fas fa-star fa-2x"></i></button></td>
+        <td style="text-align: center"><button type="button" class="" onclick="deleteLocalStorageData(this)"><i class="far fa-trash-alt fa-2x"></i></button></td>
+      </tr>`
+      );
+      understand = understand + 1;
+    } else {
+      document.getElementById("tableLocalStorage").insertAdjacentHTML(
+        "beforeend",
+        `<tr data-key="${key}">
       <td class="t-txt-word">${d.word}</td>
       <td>${d.definition}</td>
       <td data-us="${d.understanding}" style="text-align: center">
@@ -37,9 +56,12 @@ function showAllData() {
       <td data-fav="fav_${d.favorite}" style="text-align: center"><button type="button" class="btn btn-light" onclick="addFavorite(this)"><i class="fas fa-star fa-2x"></i></button></td>
       <td style="text-align: center"><button type="button" class="" onclick="deleteLocalStorageData(this)"><i class="far fa-trash-alt fa-2x"></i></button></td>
     </tr>`
-    );
-  });
-  showLength();
+      );
+    };
+    document.getElementById("understandChild").innerHTML = understand;
+    showLength();
+  }
+  )
 }
 
 //  LocalStorageが保有する件数を表示
@@ -128,15 +150,15 @@ function arreyLocalStorage() {
   if (arrayLS.length === 0) {
     document.getElementById("randomLocalStorage").textContent = "すべての単語を習得しました！新しい単語を登録しましょう！"; //表示項目を空欄にする
     console.log("０件です");
-  }else {
-  var a = arrayLS.length;
-  while (a) {
-    const j = Math.floor( Math.random() * a );
-    const t = arrayLS[--a];
-    arrayLS[a] = arrayLS[j];
-    arrayLS[j] = t;
-  }
-  displayQuiz(); // 問題生成
+  } else {
+    var a = arrayLS.length;
+    while (a) {
+      const j = Math.floor(Math.random() * a);
+      const t = arrayLS[--a];
+      arrayLS[a] = arrayLS[j];
+      arrayLS[j] = t;
+    }
+    displayQuiz(); // 問題生成
   }
 }
 
