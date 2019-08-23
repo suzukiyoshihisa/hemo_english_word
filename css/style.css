@@ -1,13 +1,366 @@
 *{
-    font-family: 'Roboto','Noto Sans JP';
-}
-body{
-    padding-top:2rem;
+    font-family: 'Source Sans Pro', 'Noto Sans JP';
 }
 
-[data-fav="fav_1"]  button{
-    background-color: #4CAF50;
+a:link{
+    text-decoration: none;
+}
+
+html{
+    font-size: 62.5%;
+}
+
+body{
+    color: #707070; 
+    font-size: 1.6rem;
+    font-weight: 300;
+    background-color: #eeeeee;
+}
+
+h1,h2,h3,h4,h5,h6{
+    margin-bottom: 1rem;
+    font-weight: normal;
+}
+
+h1{
+    font-size: 2.4rem;
+    font-weight: 700;
+}
+h2{
+    font-size: 4.0rem;
+    font-weight: bold;
+    color: #421AAF;
+}
+h3{
+    font-size: 1.6rem;
+}
+h4{
+    font-size: 1.2rem;
+}
+
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: rgb(200, 200, 200);
+    opacity: 1; /* Firefox */
   }
+  
+  :-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: rgb(200, 200, 200);
+  }
+
+.bg-white{
+    background-color: white;
+}
+/* header */
+.header{
+    height: 8rem;
+    border-bottom: 0.1rem solid #CCCCCC;
+    
+}
+.logo{
+    float: left;
+    width: 24rem;
+    height: 8rem;
+    font-size: 2.8rem;
+    text-align: center;
+    border-right: 1px #CCCCCC solid;
+    line-height: 8rem;
+    color: #421AAF;
+}
+.menu{
+    float: right;
+    padding: 0 2rem;
+}
+.menu li{
+    font-size: 2rem;
+    line-height: 8rem;
+    font-weight: bold;
+    float: left;
+    display: block;
+    margin: 0rem 2rem;
+}
+.menu li:first-child{
+    margin-left: 0rem;
+}
+.menu li:last-child{
+    margin-right: 2rem;
+}
+.menu li a{
+    color: #421AAF;
+}
+
+/* contents */
+.add,.check,.list{
+    margin: 0 auto;
+    max-width: 100rem;
+    padding: 0 2rem;
+}
+.add{
+    width: 100rem;
+    height: 50rem;
+    padding-top:8rem;
+}
+.add-newword{
+    width: 44rem;
+    float: left;
+}
+.add-graphic{
+    width: 48rem;
+    height: 100%;
+    margin-left:4rem;
+    float: right;
+}
+
+.quiz-card{
+    width: 100%;
+    height: 18rem;
+    background-color: #FFFFFF;
+    border-radius: 0.5rem 0.5rem 0 0;
+    text-align: center;
+    padding-top: 4.2rem;
+    transition: 300ms;
+}
+
+.quiz-word{
+    font-size: 4rem;
+    font-weight: bold;
+}
+#quizDefinition{
+    font-size: 2.8rem;
+    margin-top: 1.8rem;
+}
+
+.quiz-button{
+    width: 100%;
+    height: 6rem;
+    background-color: #421AAF;
+    border-radius:0 0 0.5rem 0.5rem;
+    color: #FFFFFF;
+    line-height: 6rem;
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+.answerOK,.answerNG{
+    display: block;
+    width: 24rem;
+    height: 6rem; 
+    padding: none;
+    border: none;
+    margin:none;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #FFFFFF;
+}
+.answerOK{
+    float: left;
+    background-color: #1AAF48;
+    border-radius: 0 0 0 0.5rem;
+}
+.answerNG{
+    float: right;
+    background-color: #CCCCCC;
+    border-radius: 0 0 0.5rem 0;
+}
+
+.define{
+    font-size: 2rem
+}
+
+.first-view{
+    padding-top: 2rem;
+    background-color: #eeeeee;
+}
+.first-view p{
+    font-size: 2.4rem;
+}
+
+.form-submit-word{
+    width: 40rem;
+    border: 0rem solid #c8c8c8;
+    height: 5rem;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #707070;
+    padding: 3rem 3rem;
+    border-radius: 0.5rem;
+    outline: 0;
+}
+
+.form-clipboard{
+    float: right;
+    display: block;
+    width: 8rem;
+    height: 6rem;
+    margin-right:4rem;
+    font-size: 2rem;
+    background-color: #421AAF;
+    border-radius: 0 0.5rem 0.5rem 0;
+    outline: 0;
+    text-align: center;
+    line-height: 6rem;
+    position: relative;
+}
+
+.form-clipboard a{
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.form-clipboard:hover{
+    background-color:#99C327;
+    transition: 100ms
+}
+
+.form-submit-define{
+    width: 40rem;
+    border: 0rem solid rgb(200, 200, 200);
+    height: 5rem;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #707070;
+    padding: 3rem 3rem;
+    border-radius: 0.5rem;
+    outline: 0;
+}
+
+.form-add{
+    width: 20rem;
+    padding: 1rem 3.2rem;
+    /* background: rgba(0,0,0,0);*/
+    background: #421AAF;
+    border: 0.3rem solid #421AAF;
+    border-radius: 0.5rem;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+/* list utility*/
+.listUtility{
+    float: right;
+}
+#listSort{
+    float: left;
+    display: block;
+    width: 18rem;
+    height: 5rem;
+    padding-left: 2rem;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #FFFFFF;
+    background-color: #CCCCCC;
+    border: none;
+    outline: 0;
+}
+.listFinished{
+    float: left;
+    height: 5rem;
+    border: 1px solid #CCCCCC;
+    border-radius: 0.5rem;
+    padding: 0 3rem;
+    margin-right: 4rem;
+    font-size: 2.8rem;
+    font-weight: bold;
+    line-height: 5rem;
+}
+.listFinished .sSpace{
+    margin: 0 1.5rem;
+    font-weight: normal;
+}
+
+/* list table */
+table{
+    width: 100%;
+}
+th,tr,td{
+    padding: 3rem;
+}
+th{
+    border-bottom: 3px solid #CCCCCC;
+}
+tr{
+    margin-top: 2rem;
+    border-bottom: 1px solid #CCCCCC;
+}
+.t-txt-word{
+    font-size: 3rem;
+    font-weight: bold;
+}
+
+.text-center{
+    text-align: center;
+}
+
+table button{
+    border: none;
+    background: none;
+    color: #CCCCCC;
+    outline: 0;
+}
+.progress{
+    margin: 0 auto;
+    width: 10rem;
+    height: 0.5rem;
+    background-color:#CCCCCC;
+    border-radius: 1rem;
+}
+.progressBar{
+    height: 0.5rem;
+    background-color: #421AAF;
+    border-radius: 1rem;
+}
+
+.progressClear{
+    color: #1AAF48;
+    font-size: 2.4rem;
+}
+
+
+[data-fav="fav_1"] button{
+    color: #1AAF48;
+  }
+
+/* border bottom */
+
+.btm10{
+    margin-bottom: 1rem;
+}
+
+.btm20{
+    margin-bottom: 2rem;
+}
+
+.btm30{
+    margin-bottom: 3rem;
+}
+
+.btm40{
+    margin-bottom: 4rem;
+}
+
+.btm50{
+    margin-bottom: 5rem;
+}
+.btm100{
+    margin-bottom: 10rem;
+}
+.btm150{
+    margin-bottom: 15rem;
+}
+
+/* FontAwesome */
+.fa-paste{
+    color: #FFFFFF;
+}
+
+
 
 .font-large {
 font-size: 2rem;
@@ -19,4 +372,23 @@ font-size: 2rem;
 
 .definition-show{
     visibility: hidden;
+}
+
+.clearfix::after {
+    content: "";
+    display: block;
+    clear: both;
+  }
+.cPurple{
+    color: #421AAF;
+}
+.cGreen{
+    color: #1AAF48;
+}
+
+/* Develop */
+.develop{
+    margin: auto;
+    max-width: 100rem;
+    padding: 0 2rem;
 }
