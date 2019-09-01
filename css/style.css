@@ -17,23 +17,28 @@ body{
     background-color: #eeeeee;
 }
 
-h1,h2,h3,h4,h5,h6{
+h2,h3,h4,h5,h6{
     margin-bottom: 1rem;
     font-weight: normal;
 }
 
 h1{
     font-size: 2.4rem;
-    font-weight: 700;
+    font-weight: bold;
 }
+
 h2{
     font-size: 4.0rem;
     font-weight: bold;
     color: #421AAF;
 }
+
 h3{
-    font-size: 1.6rem;
+    font-size: 3.2rem;
+    font-weight: bold;
+    color: #421AAF;
 }
+
 h4{
     font-size: 1.2rem;
 }
@@ -53,29 +58,37 @@ h4{
 }
 /* header */
 .header{
-    height: 8rem;
-    border-bottom: 0.1rem solid #CCCCCC;
-    
+    display: flex;
+    height: 5rem;
+    background-color: #421AAF;
+    box-shadow:0px 0px 6px 3px #CCCCCC;
+
 }
 .logo{
-    float: left;
-    width: 24rem;
-    height: 8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;    
+    width: 14rem;
+    height: 100%;
     font-size: 2.8rem;
-    text-align: center;
-    border-right: 1px #CCCCCC solid;
-    line-height: 8rem;
-    color: #421AAF;
+    /* border-right: 1px #CCCCCC solid; */
+    color: #FFFFFF;
+}
+
+.logo a{
+    color: #ffffff;
 }
 .menu{
-    float: right;
+    display: flex;
+    flex:1;
     padding: 0 2rem;
+    align-items: center;
+    justify-content: flex-end;
 }
 .menu li{
-    font-size: 2rem;
-    line-height: 8rem;
+
+    font-size: 2.8rem;
     font-weight: bold;
-    float: left;
     display: block;
     margin: 0rem 2rem;
 }
@@ -83,32 +96,37 @@ h4{
     margin-left: 0rem;
 }
 .menu li:last-child{
-    margin-right: 2rem;
+    margin-right: 0.1rem;
 }
 .menu li a{
-    color: #421AAF;
+    color: #FFFFFF;
 }
 
 /* contents */
+.contents{
+    width: 100%;
+    margin: 0 auto;
+    max-width: 100rem;
+    padding-top: 4rem;
+}
 .add,.check,.list{
     margin: 0 auto;
     max-width: 100rem;
-    padding: 0 2rem;
+    padding: 0 1rem;
 }
 .add{
-    width: 100rem;
+    width: 100%;
     height: 50rem;
-    padding-top:8rem;
+    padding-top: 4rem;
+    /* padding-top:8rem; pc*/
 }
 .add-newword{
-    width: 44rem;
-    float: left;
+    width: 100%;
 }
-.add-graphic{
-    width: 48rem;
+.quiz{
+    /* width: 48rem; pc*/
+    width: 100%; 
     height: 100%;
-    margin-left:4rem;
-    float: right;
 }
 
 .quiz-card{
@@ -145,7 +163,7 @@ h4{
 
 .answerOK,.answerNG{
     display: block;
-    width: 24rem;
+    width: 50%;
     height: 6rem; 
     padding: none;
     border: none;
@@ -178,18 +196,33 @@ h4{
 }
 
 .form-submit-word{
-    width: 40rem;
+    width: 100%;
     border: 0rem solid #c8c8c8;
     height: 5rem;
     font-size: 2rem;
     font-weight: bold;
     color: #707070;
-    padding: 3rem 3rem;
+    padding: 3rem 1.8rem;
     border-radius: 0.5rem;
     outline: 0;
 }
 
-.form-clipboard{
+.form-submit-define{
+    /* width: 40rem; pc*/
+    width: 100%;
+    border: 0rem solid rgb(200, 200, 200);
+    height: 5rem;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #707070;
+    padding: 3rem 1.8rem;
+    border-radius: 0.5rem;
+    outline: 0;
+}
+
+
+/* copy from clipboard */
+/* .form-clipboard{
     float: right;
     display: block;
     width: 8rem;
@@ -216,19 +249,9 @@ h4{
 .form-clipboard:hover{
     background-color:#99C327;
     transition: 100ms
-}
+} */
 
-.form-submit-define{
-    width: 40rem;
-    border: 0rem solid rgb(200, 200, 200);
-    height: 5rem;
-    font-size: 2rem;
-    font-weight: bold;
-    color: #707070;
-    padding: 3rem 3rem;
-    border-radius: 0.5rem;
-    outline: 0;
-}
+
 
 .form-add{
     width: 20rem;
@@ -244,12 +267,13 @@ h4{
 
 /* list utility*/
 .listUtility{
-    float: right;
+    display: flex;
+    justify-content: flex-end;
 }
 #listSort{
     float: left;
     display: block;
-    width: 18rem;
+    width: 10rem;
     height: 5rem;
     padding-left: 2rem;
     font-size: 2rem;
@@ -260,38 +284,79 @@ h4{
     outline: 0;
 }
 .listFinished{
-    float: left;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     height: 5rem;
     border: 1px solid #CCCCCC;
     border-radius: 0.5rem;
     padding: 0 3rem;
-    margin-right: 4rem;
     font-size: 2.8rem;
     font-weight: bold;
-    line-height: 5rem;
 }
+
 .listFinished .sSpace{
     margin: 0 1.5rem;
     font-weight: normal;
 }
 
+/* new list style*/
+#list-all, #list-cleared{
+    border-top: 1px solid #CCCCCC;
+}
+.list-row{
+    width: 100%;
+    display: flex;
+    border-bottom: 1px solid #CCCCCC;
+    padding: 1.2rem 0;
+}
+
+.list-word-wrap{
+    flex: 1;
+}
+
+.list-menu{
+    width: 5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.list-words{
+    flex: 1;
+    font-size: 2.8rem;
+    font-weight: bold;
+    margin-bottom:1rem;
+}
+
+.list-definition{
+    flex: 1;
+    font-size: 1.6rem;
+}
+
+
+
+
 /* list table */
 table{
     width: 100%;
+    margin: 
 }
-th,tr,td{
-    padding: 3rem;
-}
+
 th{
     border-bottom: 3px solid #CCCCCC;
+    padding: 2rem 0;
 }
+
 tr{
-    margin-top: 2rem;
     border-bottom: 1px solid #CCCCCC;
 }
-.t-txt-word{
-    font-size: 3rem;
+
+.list-word{
+    /* font-size: 3rem; pc*/
+    font-size: 1.6rem;
     font-weight: bold;
+    float: left;
 }
 
 .text-center{
@@ -304,6 +369,7 @@ table button{
     color: #CCCCCC;
     outline: 0;
 }
+
 .progress{
     margin: 0 auto;
     width: 10rem;
@@ -311,6 +377,7 @@ table button{
     background-color:#CCCCCC;
     border-radius: 1rem;
 }
+
 .progressBar{
     height: 0.5rem;
     background-color: #421AAF;
@@ -326,6 +393,7 @@ table button{
 [data-fav="fav_1"] button{
     color: #1AAF48;
   }
+
 
 /* border bottom */
 
@@ -391,4 +459,146 @@ font-size: 2rem;
     margin: auto;
     max-width: 100rem;
     padding: 0 2rem;
+}
+
+/* modal */
+.popup {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    opacity: 0;
+    visibility: hidden;
+    transition: .3s;
+  }
+  .popup.is-show {
+    opacity: 1;
+    visibility: visible;
+  }
+  .popup-inner {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    width: 90%;
+    max-width: 600px;
+    padding: 5rem 2rem 2rem 2rem;
+    background-color: #eeeeee;
+    z-index: 2;
+    border-radius: 0.5rem;
+  }
+  .popup-inner img {
+    width: 100%;
+  }
+
+  .close-btn {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    cursor: pointer;
+  }
+  .close-btn i {
+    font-size: 20px;
+    color: #333;
+  }
+  .black-background {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,.4);
+    z-index: 1;
+    cursor: pointer;
+  }
+.list-menu button{
+    font-size: 2rem;
+    width: 100%;
+    height: 100%;
+    background-color:#eeeeee;
+    border: none;
+    color: #707070;
+}
+
+  .modal-word{
+    width: 100%;
+    border: 0rem solid rgb(200, 200, 200);
+    height: 5rem;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #707070;
+    padding: 3rem 1.8rem;
+    border-radius: 0.5rem;
+    outline: 0;
+}
+
+.modal-define{
+    /* width: 40rem; pc*/
+    width: 100%;
+    border: 0rem solid rgb(200, 200, 200);
+    height: 5rem;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #707070;
+    padding: 3rem 1.8rem;
+    border-radius: 0.5rem;
+    outline: 0;
+}
+.fix-box{
+    display: flex;
+}
+.modal-revise{
+    flex: 1;
+    padding: 1rem 3.2rem;
+    /* background: rgba(0,0,0,0);*/
+    background: #421AAF;
+    margin-right: 1rem;
+    border-radius: 0.5rem;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+.modal-dump{
+    width: 8rem;
+    padding: 1rem 3.2rem;
+    /* background: rgba(0,0,0,0);*/
+    background: rgb(175, 36, 26);
+
+    border-radius: 0.5rem;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+
+.modal-header{
+    display: block;
+    font-size: 2.0rem;
+    font-weight: bold;
+    color: #421AAF;
+}
+
+.modal-close{
+    width: 100%;
+    padding: 1rem 3.2rem;
+    /* background: rgba(0,0,0,0);*/
+    background: #CCCCCC;
+    border-radius: 0.5rem;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #FFFFFF;
+}
+
+#modal-understand-back{
+
+    background-color: #CCCCCC;
+    height: 0.8rem;
+    border-radius: 10rem;
 }

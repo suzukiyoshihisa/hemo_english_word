@@ -15,62 +15,32 @@
 </head>
 
 <body>
-  <div class="header">
-    <h1 class="logo">FlashCard</h1>
-    <div class="menu">
-      <ul>
-        <li><a href="#add-newword">New word</a></li>
-        <li><a href="#check">Check</a></li>
-        <li><a href="#list">List</a></li>
-      </ul>
-    </div>
-  </div>
+    <div class="header">
+        <div class="logo"><a href="index.html"><h1>FlashCard</h1></a></div>
+        <div class="menu">
+          <ul>
+            <li><a href="list.html"><i class="far fa-list-alt"></i></a></li>
+          </ul>
+        </div>
+      </div>
   <div class="add clearfix btm50">
-    <div class="add-newword">
-      <h2>New Words</h2>
-      <p class="define btm50">Add new words you want to learn.</p>
+    <div class="add-newword btm50">
+      <h2>言葉を登録</h2>
+      <p class="define btm50">新しい単語を登録しましょう</p>
       <form name="submit">
         <input type="text" id="word" class="form-submit-word btm20" autocomplete=off placeholder="Word" />
         <input type="text" id="definition" class="form-submit-define btm20" autocomplete=off placeholder="Definition" />
-        <button type="button" id="saveLocalStorage" class="form-add" onclick="pushData()">Add</button>
+        <button type="button" id="saveLocalStorage" class="form-add" onclick="pushData()">追加</button>
       </form>
     </div>
-    <div class="add-graphic">
-      <h2>Flash cards</h2>
-      <p class="define btm50">Check your understanding</p>
+    <div class="quiz">
+      <h2>単語帳</h2>
+      <p class="define btm50">単語を覚えましょう</p>
       <div id="randomLocalStorage">
       </div>
     </div>
   </div>
-  <div class="list btm50">
-    <h2>List</h2>
-    <p class="define btm50">Saved your word list</p>
-    <div class="listUtility">
-    <div class="listFinished">
-      <span class="cGreen"><i class="fas fa-check-circle"></i>&nbsp;</span><span id="understandChild" class="cGreen">0</span>
-      <span class="sSpace">/</span>
-      <span id="countLocalStorage"></span>
-    </div>
-    <div class="listUtility clearfix">
-        <select name="listSort" id="listSort">
-            <option value="recent">Recent</option>
-            <option value="low">Low Score</option>
-            <option value="finished">Finished</option>
-            </select>            
-    </div>
-  </div>
-    <table>
-      <tbody id="tableLocalStorage"></tbody>
-    </table>
-  </div>
-  <div class="develop">
-    <h2>Develop</h2>
-    <button type="button" class="" onclick="dumpLocalStorageData()">全てのデータを削除</button>
-    <h2>JSONインポート（データ全削除後に実行すること）</h2>
-    <form name="jsonForm">
-      <input name="jsonFile" type="file" /><br />
-    </form>
-  </div>
+  <script type="text/javascript" src="./js/common.js"></script>
   <script type="text/javascript" src="./js/index.js"></script>
 </body>
 
